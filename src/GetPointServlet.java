@@ -39,7 +39,8 @@ public class GetPointServlet extends HttpServlet {
 				final String pass = "JsonKadai11";
 				
 				String tenpo_id = request.getParameter("TENPO_ID");
-				String user_id = request.getParameter("USER_ID");				
+				String user_id = request.getParameter("USER_ID");
+				String point = null;
 
 		try {
 			Class.forName(driverClassName);
@@ -50,13 +51,18 @@ public class GetPointServlet extends HttpServlet {
 						); 
 			PreparedStatement st2 =
 					con.prepareStatement(
-							"insert into point (tenpo_id,user_id,point) values(?,?,500)"
+							"insert ignore into point (tenpo_id,user_id,point) values(?,?,500)"
 						); 
 			
-			String point = null;	
 			
-			st.setString(1, tenpo_id);
-			st.setString(2, user_id);			
+			//テーブルない場合の追加処理
+			st2.setString(1,tenpo_id);
+			st2.setString(2,user_id);			
+			st2.executeUpdate();			
+				
+			//データの取得
+			st.setString(1,tenpo_id);
+			st.setString(2,user_id);			
 			ResultSet result = st.executeQuery();
 			
 			
@@ -64,15 +70,11 @@ public class GetPointServlet extends HttpServlet {
 				point = result.getString("point");
 			}
 			
-			else{
-				st2.setString(1, tenpo_id);
-				st2.setString(2, user_id);			
-				st2.executeUpdate();
-			}
-				
-				request.setAttribute("point",point);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
-				rd.forward(request, response);
+			con.close();
+			
+			request.setAttribute("point",point);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
+			rd.forward(request, response);
 			
 		} catch (ClassNotFoundException e ) {
 			
