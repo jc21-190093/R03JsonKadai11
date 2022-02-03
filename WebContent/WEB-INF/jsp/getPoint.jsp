@@ -5,20 +5,7 @@
 <%@page import="java.util.List"%>
 	
 <%
-Optional<List<String[]>> optList = Optional.ofNullable((List<String[]>) request.getAttribute("list"));
-List<String[]> list = new ArrayList<>();
-if (optList.isPresent()) {
-	list = optList.get();
-}
+	int point = (int)request.getAttribute("point");
 %>
 
-<%
-for(String[] s: list) {
-%>
-
-
-{"POINT": <%= s[0] %> }
-
-<%
-}
-%>
+{"POINT": <%= point %> }
