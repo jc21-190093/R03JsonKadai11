@@ -38,8 +38,8 @@ public class GetPointServlet extends HttpServlet {
 				final String id = "jsonkadai11";
 				final String pass = "JsonKadai11";
 				
-				String tenpo_id = request.getParameter("tenpo_id");
-				String user_id = request.getParameter("user_id");				
+				String tenpo_id = request.getParameter("TENPO_ID");
+				String user_id = request.getParameter("USER_ID");				
 
 		try {
 			Class.forName(driverClassName);
@@ -52,31 +52,26 @@ public class GetPointServlet extends HttpServlet {
 					con.prepareStatement(
 							"insert into point (tenpo_id,user_id,point) values(?,?,500)"
 						); 
-			tenpo_id = "1000000001";
-			user_id = "190077@jc-21.jp";
 			
+			int point = 0;	
+	
 			
 			st.setString(1, tenpo_id);
 			st.setString(2, user_id);			
 			ResultSet result = st.executeQuery();
 			
-			List<String[]> list = new ArrayList<>();
 			
-			if( result.next() == true) {
-				
-				String[] s = new String[1];
-				s[0] = result.getString("point");
-				list.add(s);				
+			if( result.next() == true) {				
+				point = result.getInt("point");
 			}
 			
 			else{
 				st2.setString(1, tenpo_id);
-				st2.setString(2, user_id);							
-			
+				st2.setString(2, user_id);			
 				st2.executeUpdate();				
 			}
 				
-				request.setAttribute("list", list);
+				request.setAttribute("point", point);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
 				rd.forward(request, response);
 			
