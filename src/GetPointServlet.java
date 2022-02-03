@@ -53,8 +53,7 @@ public class GetPointServlet extends HttpServlet {
 							"insert into point (tenpo_id,user_id,point) values(?,?,500)"
 						); 
 			
-			int point = 0;	
-	
+			String point = null;	
 			
 			st.setString(1, tenpo_id);
 			st.setString(2, user_id);			
@@ -62,16 +61,16 @@ public class GetPointServlet extends HttpServlet {
 			
 			
 			if( result.next() == true) {				
-				point = result.getInt("point");
+				point = result.getString("point");
 			}
 			
 			else{
 				st2.setString(1, tenpo_id);
 				st2.setString(2, user_id);			
-				st2.executeUpdate();				
+				st2.executeUpdate();
 			}
 				
-				request.setAttribute("point", point);
+				request.setAttribute("point",point);
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
 				rd.forward(request, response);
 			
