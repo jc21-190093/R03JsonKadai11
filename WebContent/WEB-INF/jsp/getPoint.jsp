@@ -4,4 +4,4 @@
 	String POINT = (String)request.getAttribute("point");
 %>
 
-{"POINT": <%= POINT %> }
+{"POINT":<%= POINT %>}
