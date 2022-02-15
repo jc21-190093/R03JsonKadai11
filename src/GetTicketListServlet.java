@@ -44,11 +44,9 @@ public class GetTicketListServlet extends HttpServlet {
 				Connection con = DriverManager.getConnection(url, id, pass);
 				int point = 0;
 
-				//String tenpo_id = request.getParameter("TENPO_ID");
-				//String user_id = request.getParameter("USER_ID");
-				
-		String tenpo_id = "1000000001";
-		String user_id = "190077@jc-21.jp";
+				String tenpo_id = request.getParameter("TENPO_ID");
+				String user_id = request.getParameter("USER_ID");
+
 
 				PreparedStatement st = con
 						.prepareStatement("select * from POINT where tenpo_id =? and user_id=?");
