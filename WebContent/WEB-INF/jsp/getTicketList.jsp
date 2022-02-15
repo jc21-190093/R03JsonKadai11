@@ -15,7 +15,9 @@
 <%
 for(String[] s:list){
 %>
-{"ID":ticket_id,"OptName":ticket_name,"POINT":point},
+{"ID":<%=s[0] %>,"OptName":<%=s[1] %>,"POINT":<%=s[2] %>},
 
 <%}%>
+
+
 
