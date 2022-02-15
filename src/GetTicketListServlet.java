@@ -59,7 +59,7 @@ public class GetTicketListServlet extends HttpServlet {
 				if (result.next()) {
 					point = result.getInt("point");
 				}
-
+ 
 				PreparedStatement pst = con.prepareStatement("select * from TICKET where tenpo_id=?  && POINT<=?");
 				pst.setString(1, tenpo_id);
 				pst.setInt(2, point);
