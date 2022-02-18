@@ -6,9 +6,7 @@
 List<String[]> list= new ArrayList<>();
 if(optList.isPresent()){
 	list = optList.get();
-	}%>
-[
-<%for(String[] s:list){%> 
-{"ID":<%=s[0] %>,"OptName":"<%=s[1] %>","POINT":<%=s[2] %>},
-<%}%>
-]
+	}%>[
+<%for(String[] s:list){
+%> {"ID":<%=s[0] %>,"OptName":"<%=s[1] %>","POINT":<%=s[2] %>},
+<%}%>]
